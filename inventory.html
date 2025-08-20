@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse our extensive inventory of quality vehicles at Prophecy Autos. Find your perfect car with our easy search and filter options.">
+    <meta name="keywords" content="car inventory, used cars, new cars, car dealership, luxury cars, SUVs, sedans">
+    <title>Vehicle Inventory | Prophecy Autos</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for inventory page */
+        .inventory-header {
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('images/hero-bg.svg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .filter-section {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+        
+        .filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .filter-group select,
+        .filter-group input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        
+        .range-slider {
+            width: 100%;
+        }
+        
+        .range-value {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 500;
+            color: #1e3a8a;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .car-item {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .car-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .car-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .car-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .car-item:hover .car-image img {
+            transform: scale(1.1);
+        }
+        
+        .car-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #f59e0b;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .car-details {
+            padding: 20px;
+        }
+        
+        .car-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #1e3a8a;
+        }
+        
+        .car-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .car-info span {
+            display: flex;
+            align-items: center;
+        }
+        
+        .car-info i {
+            margin-right: 5px;
+            color: #f59e0b;
+        }
+        
+        .car-price {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+        
+        .car-description {
+            margin-bottom: 15px;
+            color: #666;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .inventory-header h1 {
+            margin-bottom: 15px;
+        }
+        
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .results-count {
+            font-weight: 500;
+        }
+        
+        .sort-options select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px 0;
+            grid-column: 1 / -1;
+            display: none;
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .pagination a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #333;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .pagination a:hover,
+        .pagination a.active {
+            background-color: #1e3a8a;
+            color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            .filter-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .filter-buttons .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .results-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.svg" alt="Prophecy Autos">
+                    </a>
+                </div>
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="inventory.html" class="active">Inventory</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Inventory Header -->
+    <section class="inventory-header">
+        <div class="container">
+            <h1>Our Vehicle Inventory</h1>
+            <p>Browse our extensive collection of premium vehicles</p>
+        </div>
+    </section>
+
+    <!-- Inventory Content -->
+    <section class="inventory-section">
+        <div class="container">
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <form id="filter-form" class="filter-form">
+                    <!-- Search Input -->
+                    <div class="filter-group">
+                        <label for="search-input">Search</label>
+                        <input type="text" id="search-input" placeholder="Search by make, model, etc.">
+                    </div>
+                    
+                    <!-- Make Filter -->
+                    <div class="filter-group">
+                        <label for="make-filter">Make</label>
+                        <select id="make-filter">
+                            <option value="all">All Makes</option>
+                            <option value="lexus">Lexus</option>
+                            <option value="mercedes">Mercedes-Benz</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Model Filter -->
+                    <div class="filter-group">
+                        <label for="model-filter">Model</label>
+                        <select id="model-filter">
+                            <option value="all">All Models</option>
+                            <option value="gx460">GX460</option>
+                            <option value="es350">ES350</option>
+                            <option value="is250">IS250</option>
+                            <option value="rx350">RX350</option>
+                            <option value="ml350">ML 350</option>
+                            <option value="gle">GLE</option>
+                            <option value="c300">C300</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Year Filter -->
+                    <div class="filter-group">
+                        <label for="year-filter">Year</label>
+                        <select id="year-filter">
+                            <option value="all">All Years</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2010">2010</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Condition Filter -->
+                    <div class="filter-group">
+                        <label for="condition-filter">Condition</label>
+                        <select id="condition-filter">
+                            <option value="all">All Conditions</option>
+                            <option value="used">Used</option>
+                            <option value="neatly-used">Neatly Used</option>
+                            <option value="direct-toks">Direct TOKs</option>
+                            <option value="toks-standard">TOKs Standard</option>
+                            <option value="neatly-registered">Neatly Registered</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Price Range Filter -->
+                    <div class="filter-group">
+                        <label for="price-range">Max Price: <span id="price-range-value">₦30,000,000</span></label>
+                        <input type="range" id="price-range" min="10" max="100" value="100" class="range-slider">
+                    </div>
+                    
+                    <!-- Filter Buttons -->
+                    <div class="filter-buttons">
+                        <button type="button" id="apply-filters" class="btn btn-primary">Apply Filters</button>
+                        <button type="button" id="reset-filters" class="btn btn-outline">Reset</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Results Info -->
+            <div class="results-info">
+                <div class="results-count">
+                    Showing <span id="results-count">12</span> vehicles
+                </div>
+                <div class="sort-options">
+                    <label for="sort-by">Sort by:</label>
+                    <select id="sort-by">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Inventory Grid -->
+            <div class="inventory-grid">
+                <!-- Car Item 1 -->                
+                <div class="car-item" data-make="lexus" data-model="gx460" data-year="2015" data-condition="used" data-price="27000000">
+                    <div class="car-image">
+                        <img src="images/Car 1.jpg" alt="Lexus GX460 2015">
+                        <div class="car-tag">Neatly Used</div>
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Lexus GX460 2015 Model</h3>
+                        <div class="car-info">
+                            <span><i class="fas fa-calendar"></i> 2015</span>
+                            <span><i class="fas fa-car"></i> Neatly Used</span>
+                        </div>
+                        <div class="car-price">
+                            <span>₦27,000,000</span>
+                        </div>
+                        <p class="car-description">Neatly Used Lexus GX460 2015 Model in excellent condition.</p>
+                        <a href="car-details.html?id=1" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Car Item 2 -->
+                <div class="car-item" data-make="lexus" data-model="es350" data-year="2010" data-condition="used" data-price="13800000">
+                    <div class="car-image">
+                        <img src="images/Car 2.jpg" alt="Lexus ES350 2010">
+                        <div class="car-tag">Direct TOKs</div>
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Lexus ES350 2010 Model</h3>
+                        <div class="car-info">
+                            <span><i class="fas fa-calendar"></i> 2010</span>
+                            <span><i class="fas fa-check-circle"></i> Full Options</span>
+                            <span><i class="fas fa-certificate"></i> Direct TOKs</span>
+                        </div>
+                        <div class="car-price">
+                            <span>₦13,800,000</span>
+                        </div>
+                        <p class="car-description">Direct TOKs Lexus ES350 2010 Model with Full Options.</p>
+                        <a href="car-details.html?id=2" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Car Item 3 -->
+                <div class="car-item" data-make="lexus" data-model="is250" data-year="2010" data-condition="used" data-price="9800000">
+                    <div class="car-image">
+                        <img src="images/Car 3.jpg" alt="Lexus IS250">
+                        <div class="car-tag">Used</div>
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Lexus IS250</h3>
+                        <div class="car-info">
+                            <span><i class="fas fa-calendar"></i> 2010</span>
+                        </div>
+                        <div class="car-price">
+                            <span>₦9,800,000</span>
+                        </div>
+                        <p class="car-description">Lexus IS250 in excellent condition.</p>
+                        <a href="car-details.html?id=3" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Car Item 4 -->
+                <div class="car-item" data-make="mercedes" data-model="ml350" data-year="2013" data-condition="used" data-price="17500000">
+                    <div class="car-image">
+                        <img src="images/Car 4.jpg" alt="Mercedes Benz ML 350 2013">
+                        <div class="car-tag">TOKs Standard</div>
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Mercedes Benz ML 350 2013 Model</h3>
+                        <div class="car-info">
+                            <span><i class="fas fa-calendar"></i> 2013</span>
+                            <span><i class="fas fa-certificate"></i> TOKs Standard</span>
+                        </div>
+                        <div class="car-price">
+                            <span>₦17,500,000</span>
+                        </div>
+                        <p class="car-description">TOKs Standard Mercedes Benz ML 350 2013 Model.</p>
+                        <a href="car-details.html?id=4" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Car Item 5 -->
+                <div class="car-item" data-make="mercedes" data-model="gle" data-year="2016" data-condition="used" data-price="30000000">
+                    <div class="car-image">
+                        <img src="images/Car 5.jpg" alt="Mercedes GLE 2016">
+                        <div class="car-tag">Less than a year used</div>
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Mercedes GLE 2016 Model</h3>
+                        <div class="car-info">
+                            <span><i class="fas fa-calendar"></i> 2016</span>
+                            <span><i class="fas fa-check-circle"></i> Full Option</span>
+                            <span><i class="fas fa-car"></i> Less than a year used</span>
+                        </div>
+                        <div class="car-price">
+                            <span>₦30,000,000</span>
+                        </div>
+                        <p class="car-description">Less than a year used Mercedes GLE 2016 Model with Full Option.</p>
+                        <a href="car-details.html?id=5" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Car Item 6 -->
+                <div class="car-item" data-make="lexus" data-model="rx350" data-year="2014" data-condition="used" data-price="24600000">
+                    <div class="car-image">
+                        <img src="images/Car 6.jpg" alt="Lexus RX350 2014">
+                        <div class="car-tag">Direct TOKs</div>
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Lexus RX350 2014 Model</h3>
+                        <div class="car-info">
+                            <span><i class="fas fa-calendar"></i> 2014</span>
+                            <span><i class="fas fa-certificate"></i> Direct TOKs</span>
+                            <span><i class="fas fa-check-circle"></i> Full Option</span>
+                            <span><i class="fas fa-car-crash"></i> Accident Free</span>
+                        </div>
+                        <div class="car-price">
+                            <span>₦24,600,000</span>
+                        </div>
+                        <p class="car-description">Direct TOKs Lexus RX350 2014 Model, Accident Free and Full Option.</p>
+                        <a href="car-details.html?id=6" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Car Item 7 -->
+                <div class="car-item" data-make="mercedes" data-model="c300" data-year="2015" data-condition="used" data-price="13500000">
+                    <div class="car-image">
+                        <img src="images/Car 7.jpg" alt="Mercedes Benz C300 2015">
+                        <div class="car-tag">Neatly Registered</div>
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Mercedes Benz C300 2015 Model</h3>
+                        <div class="car-info">
+                            <span><i class="fas fa-calendar"></i> 2015</span>
+                            <span><i class="fas fa-car"></i> Neatly Registered</span>
+                            <span><i class="fas fa-key"></i> Thumb start</span>
+                            <span><i class="fas fa-calendar-check"></i> 2022 Entry</span>
+                        </div>
+                        <div class="car-price">
+                            <span>₦13,500,000</span>
+                        </div>
+                        <p class="car-description">Neatly Registered Mercedes Benz C300 2015 Model with Thumb start, 2022 Entry.</p>
+                        <a href="car-details.html?id=7" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                        <div class="car-price">
+                            <span>$25,000</span>
+                        </div>
+                        <p class="car-description">Compact hatchback with German engineering, excellent handling, and practical interior space.</p>
+                        <a href="car-details.html?id=6" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- No Results Message -->
+                <div id="no-results" class="no-results">
+                    <i class="fas fa-search"></i>
+                    <h3>No vehicles match your search criteria</h3>
+                    <p>Try adjusting your filters or search terms</p>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#"><i class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="Prophecy Autos" style="height: 60px; margin-bottom: 15px;">
+                    </div>
+                    <p>Premium car dealership offering quality vehicles, financing, trade-in and after-sales services.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="inventory.html">Inventory</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#financing">Financing Options</a></li>
+                        <li><a href="services.html#trade-in">Trade-In Services</a></li>
+                        <li><a href="services.html#import">Import Assistance</a></li>
+                        <li><a href="services.html#after-sales">After-Sales Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Buknor, Islo Lagos, Nigeria</li>
+                        <li><i class="fas fa-phone"></i> +234 903 411 0043</li>
+                        <li><i class="fas fa-whatsapp"></i> +234 904 351 4797</li>
+                        <li><i class="fas fa-envelope"></i> info@prophecyautos.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Prophecy Autos. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Chat Button -->
+    <div class="whatsapp-chat">
+        <a href="https://wa.me/2349043514797" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/whatsapp-chat.js"></script>
+    <script src="js/inventory.js"></script>
+</body>
+</html>

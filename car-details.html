@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View detailed information about our premium vehicles at Prophecy Autos. Explore specifications, features, and request more information.">
+    <meta name="keywords" content="car details, vehicle specifications, luxury cars, car features, car inquiry">
+    <title>Car Details | Prophecy Autos</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for car details page */
+        .car-details-section {
+            padding: 80px 0;
+        }
+        
+        .car-details-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .car-gallery {
+            position: relative;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .car-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #f59e0b;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 10;
+        }
+        
+        .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .car-thumbnail {
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .car-thumbnail.active {
+            border-color: #1e3a8a;
+        }
+        
+        .car-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .car-info-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .car-title {
+            font-size: 2rem;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+        
+        .car-price {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+        
+        .car-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .meta-item i {
+            width: 40px;
+            height: 40px;
+            background-color: #e6f0ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: #1e3a8a;
+            font-size: 1.2rem;
+        }
+        
+        .meta-item .meta-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 3px;
+        }
+        
+        .meta-item .meta-value {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .car-description {
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .car-features {
+            margin-bottom: 30px;
+        }
+        
+        .car-features h3 {
+            margin-bottom: 15px;
+            color: #1e3a8a;
+        }
+        
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-item i {
+            color: #f59e0b;
+            margin-right: 10px;
+        }
+        
+        .car-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .car-actions .btn {
+            flex: 1;
+        }
+        
+        .specs-section {
+            margin-top: 60px;
+        }
+        
+        .specs-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .specs-title {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .spec-group h4 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .spec-name {
+            color: #666;
+        }
+        
+        .spec-value {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .inquiry-section {
+            margin-top: 60px;
+        }
+        
+        .inquiry-container {
+            background-color: #f0f4f8;
+            border-radius: 10px;
+            padding: 30px;
+        }
+        
+        .inquiry-title {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .inquiry-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .similar-cars-section {
+            margin-top: 60px;
+        }
+        
+        .similar-cars-title {
+            color: #1e3a8a;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .similar-cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .car-details-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .specs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .car-meta {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .car-actions {
+                flex-direction: column;
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.svg" alt="Prophecy Autos">
+                    </a>
+                </div>
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="inventory.html" class="active">Inventory</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Car Details Section -->
+    <section class="car-details-section">
+        <div class="container">
+            <div class="car-details-container">
+                <!-- Car Gallery -->
+                <div class="car-gallery">
+                    <div class="car-tag" id="car-condition-tag">Neatly Used</div>
+                    <div class="main-image">
+                        <img id="main-car-image" src="images/Car 1.jpg" alt="Car Image">
+                    </div>
+                    <div class="thumbnails">
+                        <div class="car-thumbnail active">
+                            <img src="images/Car 1.jpg" alt="Car Front">
+                        </div>
+                        <!-- Additional thumbnails will be added dynamically if available -->
+                    </div>
+                </div>
+                
+                <!-- Car Information -->
+                <div class="car-info-container">
+                    <h1 class="car-title" id="car-title">Lexus GX460 2015 Model</h1>
+                    <div class="car-price" id="car-price">₦27,000,000</div>
+                    
+                    <div class="car-meta" id="car-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <div>
+                                <div class="meta-title">Year</div>
+                                <div class="meta-value" id="car-year">2015</div>
+                            </div>
+                        </div>
+                        
+                        <div class="meta-item">
+                            <i class="fas fa-car"></i>
+                            <div>
+                                <div class="meta-title">Condition</div>
+                                <div class="meta-value" id="car-condition">Neatly Used</div>
+                            </div>
+                        </div>
+                        
+                        <div class="meta-item">
+                            <i class="fas fa-tag"></i>
+                            <div>
+                                <div class="meta-title">Make</div>
+                                <div class="meta-value" id="car-make">Lexus</div>
+                            </div>
+                        </div>
+                        
+                        <div class="meta-item">
+                            <i class="fas fa-car-side"></i>
+                            <div>
+                                <div class="meta-title">Model</div>
+                                <div class="meta-value" id="car-model">GX460</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="car-description">
+                        <p id="car-description-text">Neatly Used Lexus GX460 2015 Model in excellent condition. This premium SUV offers exceptional comfort, reliability, and performance.</p>
+                    </div>
+                    
+                    <div class="car-features">
+                        <h3>Key Features</h3>
+                        <div class="features-list" id="features-list">
+                            <!-- Features will be populated dynamically based on the car -->
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Neatly Used</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>2015 Model</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Excellent Condition</span>
+                            </div>
+                                <span>Heated & Ventilated Seats</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Wireless Charging</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Ambient Lighting</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Digital Instrument Cluster</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="car-actions">
+                        <a href="#inquiry-form" class="btn btn-primary">Inquire Now</a>
+                        <a href="tel:+2349034110043" class="btn btn-secondary"><i class="fas fa-phone"></i> Call Us</a>
+                        <a href="https://wa.me/2349043514797" class="btn btn-outline"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Specifications Section -->
+            <div class="specs-section">
+                <div class="specs-container">
+                    <h2 class="specs-title">Vehicle Specifications</h2>
+                    <div class="specs-grid">
+                        <div class="spec-group">
+                            <h4>Engine & Performance</h4>
+                            <div class="spec-item">
+                                <div class="spec-name">Engine Type</div>
+                                <div class="spec-value">2.0L Turbo Inline-4</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">Horsepower</div>
+                                <div class="spec-value">255 hp @ 5,800 rpm</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">Torque</div>
+                                <div class="spec-value">273 lb-ft @ 1,800 rpm</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">Acceleration (0-60)</div>
+                                <div class="spec-value">6.1 seconds</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">Top Speed</div>
+                                <div class="spec-value">130 mph (limited)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="spec-group">
+                            <h4>Dimensions & Capacity</h4>
+                            <div class="spec-item">
+                                <div class="spec-name">Length</div>
+                                <div class="spec-value">194.3 inches</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">Width</div>
+                                <div class="spec-value">73.7 inches</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">Height</div>
+                                <div class="spec-value">57.8 inches</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">Wheelbase</div>
+                                <div class="spec-value">115.7 inches</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">Cargo Volume</div>
+                                <div class="spec-value">13.1 cubic feet</div>
+                            </div>
+                        </div>
+                        
+                        <div class="spec-group">
+                            <h4>Fuel & Efficiency</h4>
+                            <div class="spec-item">
+                                <div class="spec-name">Fuel Type</div>
+                                <div class="spec-value">Premium Unleaded</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">Fuel Capacity</div>
+                                <div class="spec-value">17.4 gallons</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">City MPG</div>
+                                <div class="spec-value">23 mpg</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">Highway MPG</div>
+                                <div class="spec-value">31 mpg</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-name">Combined MPG</div>
+                                <div class="spec-value">26 mpg</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Inquiry Form Section -->
+            <div id="inquiry-form" class="inquiry-section">
+                <div class="inquiry-container">
+                    <h2 class="inquiry-title">Interested in this vehicle?</h2>
+                    <form class="inquiry-form">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inquiry-type">Inquiry Type</label>
+                            <select id="inquiry-type" name="inquiry-type">
+                                <option value="test-drive">Schedule Test Drive</option>
+                                <option value="price-quote">Request Price Quote</option>
+                                <option value="financing">Financing Information</option>
+                                <option value="trade-in">Trade-In Valuation</option>
+                                <option value="general">General Inquiry</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Please include any specific questions or preferred contact times"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Submit Inquiry</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Similar Cars Section -->
+            <div class="similar-cars-section">
+                <h2 class="similar-cars-title">Similar Vehicles You May Like</h2>
+                <div class="similar-cars-grid">
+                    <!-- Similar Car 1 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="images/cars/car2.jpg" alt="BMW X5">
+                            <div class="car-tag">Used</div>
+                        </div>
+                        <div class="car-details">
+                            <h3>BMW X5</h3>
+                            <div class="car-info">
+                                <span><i class="fas fa-calendar"></i> 2022</span>
+                                <span><i class="fas fa-tachometer-alt"></i> 25,000 km</span>
+                            </div>
+                            <div class="car-price">
+                                <span>$58,000</span>
+                            </div>
+                            <a href="car-details.html?id=2" class="btn btn-outline">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Similar Car 2 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="images/cars/car3.jpg" alt="Audi Q7">
+                            <div class="car-tag">New</div>
+                        </div>
+                        <div class="car-details">
+                            <h3>Audi Q7</h3>
+                            <div class="car-info">
+                                <span><i class="fas fa-calendar"></i> 2023</span>
+                                <span><i class="fas fa-tachometer-alt"></i> 10,000 km</span>
+                            </div>
+                            <div class="car-price">
+                                <span>$72,000</span>
+                            </div>
+                            <a href="car-details.html?id=3" class="btn btn-outline">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Similar Car 3 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="images/cars/car4.jpg" alt="Lexus RX">
+                            <div class="car-tag">Certified</div>
+                        </div>
+                        <div class="car-details">
+                            <h3>Lexus RX</h3>
+                            <div class="car-info">
+                                <span><i class="fas fa-calendar"></i> 2022</span>
+                                <span><i class="fas fa-tachometer-alt"></i> 18,000 km</span>
+                            </div>
+                            <div class="car-price">
+                                <span>$55,000</span>
+                            </div>
+                            <a href="car-details.html?id=4" class="btn btn-outline">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="Prophecy Autos">
+                    </div>
+                    <p>Premium car dealership offering quality vehicles, financing, trade-in and after-sales services.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="inventory.html">Inventory</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#financing">Financing Options</a></li>
+                        <li><a href="services.html#trade-in">Trade-In Services</a></li>
+                        <li><a href="services.html#import">Import Assistance</a></li>
+                        <li><a href="services.html#after-sales">After-Sales Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Buknor, Islo Lagos, Nigeria</li>
+                        <li><i class="fas fa-phone"></i> +234 903 411 0043</li>
+                        <li><i class="fas fa-envelope"></i> info@prophecyautos.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Prophecy Autos. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Chat Button -->
+    <div class="whatsapp-chat">
+        <a href="https://wa.me/2349043514797" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/whatsapp-chat.js"></script>
+    <script src="js/car-details.js"></script>
+</body>
+</html>

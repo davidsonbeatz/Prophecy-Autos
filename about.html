@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about Prophecy Autos - your trusted car dealership offering premium vehicles and exceptional customer service.">
+    <meta name="keywords" content="car dealership, about us, car dealer history, automotive experts, luxury vehicles">
+    <title>About Us | Prophecy Autos</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for about page */
+        .about-hero {
+            background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0.8)), url('images/about-hero.jpg') no-repeat center center/cover;
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .about-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .about-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .about-section {
+            padding: 80px 0;
+        }
+        
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-content h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+        
+        .stat-text {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .mission-section {
+            background-color: #f0f4f8;
+            padding: 80px 0;
+        }
+        
+        .mission-container {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .mission-container h2 {
+            color: #1e3a8a;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+        
+        .mission-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .mission-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mission-icon {
+            width: 70px;
+            height: 70px;
+            background-color: #e6f0ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .mission-icon i {
+            font-size: 2rem;
+            color: #1e3a8a;
+        }
+        
+        .mission-card h3 {
+            margin-bottom: 15px;
+            color: #1e3a8a;
+        }
+        
+        .mission-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .team-section {
+            padding: 80px 0;
+        }
+        
+        .team-container {
+            text-align: center;
+        }
+        
+        .team-container h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+        
+        .team-container p {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: #666;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: 20px;
+        }
+        
+        .member-info h3 {
+            margin-bottom: 5px;
+            color: #1e3a8a;
+        }
+        
+        .member-position {
+            color: #f59e0b;
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .member-bio {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .member-social a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #f0f4f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e3a8a;
+            transition: all 0.3s ease;
+        }
+        
+        .member-social a:hover {
+            background-color: #1e3a8a;
+            color: #fff;
+        }
+        
+        .history-section {
+            background-color: #f0f4f8;
+            padding: 80px 0;
+        }
+        
+        .history-container h2 {
+            color: #1e3a8a;
+            margin-bottom: 50px;
+            text-align: center;
+            font-size: 2.2rem;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #1e3a8a;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: #fff;
+            border: 4px solid #f59e0b;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -12px;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: #fff;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-content h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-date {
+            color: #f59e0b;
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .timeline-content p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .cta-section {
+            padding: 80px 0;
+            background: url('images/cta-bg.svg') no-repeat center center/cover;
+            text-align: center;
+            color: #fff;
+        }
+        
+        .cta-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-container p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 992px) {
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+            
+            .mission-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.svg" alt="Prophecy Autos">
+                    </a>
+                </div>
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="inventory.html">Inventory</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html" class="active">About Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>About Prophecy Autos</h1>
+            <p>We are a premium car dealership dedicated to providing exceptional vehicles and outstanding customer service. With years of experience in the automotive industry, we've built a reputation for quality, integrity, and excellence.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-container">
+                <div class="about-content">
+                    <h2>Our Story</h2>
+                    <p>Founded in 2010, Prophecy Autos began with a simple vision: to create a car buying experience that puts customers first. What started as a small dealership with just five vehicles has grown into one of the region's most trusted automotive retailers.</p>
+                    <p>Our founder, Michael Prophecy, believed that buying a car should be exciting, transparent, and hassle-free. This philosophy continues to guide everything we do today. We've assembled a team of passionate automotive experts who share this commitment to excellence and customer satisfaction.</p>
+                    <p>Over the years, we've expanded our inventory, enhanced our services, and built lasting relationships with our customers. But one thing remains unchanged: our dedication to providing quality vehicles and exceptional service.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">13+</div>
+                            <div class="stat-text">Years of Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5000+</div>
+                            <div class="stat-text">Happy Customers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-text">Premium Vehicles</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <img src="images/about-dealership.jpg" alt="Prophecy Autos Dealership">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-container">
+                <h2>Our Mission & Values</h2>
+                <p>At Prophecy Autos, we're driven by a set of core values that define who we are and how we operate. These principles guide our decisions and shape our interactions with customers, partners, and the community.</p>
+                
+                <div class="mission-cards">
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Excellence</h3>
+                        <p>We strive for excellence in everything we do, from the vehicles we select to the service we provide. Our commitment to quality is unwavering.</p>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Integrity</h3>
+                        <p>We believe in honesty, transparency, and ethical business practices. We build trust through clear communication and fair dealings.</p>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Customer Focus</h3>
+                        <p>Our customers are at the heart of everything we do. We're dedicated to understanding their needs and exceeding their expectations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="team-container">
+                <h2>Meet Our Team</h2>
+                <p>Our success is built on the expertise and dedication of our team. Get to know the people who make Prophecy Autos special.</p>
+                
+                <div class="team-grid">
+                    <!-- Team Member 1 -->
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="images/team/team1.jpg" alt="Michael Prophecy">
+                        </div>
+                        <div class="member-info">
+                            <h3>Michael Prophecy</h3>
+                            <span class="member-position">Founder & CEO</span>
+                            <p class="member-bio">With over 20 years in the automotive industry, Michael founded Prophecy Autos with a vision to transform the car buying experience.</p>
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 2 -->
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="images/team/team2.jpg" alt="Sarah Johnson">
+                        </div>
+                        <div class="member-info">
+                            <h3>Sarah Johnson</h3>
+                            <span class="member-position">Sales Director</span>
+                            <p class="member-bio">Sarah leads our sales team with enthusiasm and expertise, ensuring every customer finds their perfect vehicle.</p>
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 3 -->
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="images/team/team3.jpg" alt="David Chen">
+                        </div>
+                        <div class="member-info">
+                            <h3>David Chen</h3>
+                            <span class="member-position">Service Manager</span>
+                            <p class="member-bio">David oversees our service department, bringing technical expertise and a commitment to quality maintenance and repairs.</p>
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 4 -->
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="images/team/team4.jpg" alt="Emily Rodriguez">
+                        </div>
+                        <div class="member-info">
+                            <h3>Emily Rodriguez</h3>
+                            <span class="member-position">Finance Manager</span>
+                            <p class="member-bio">Emily helps our customers navigate financing options, making the car buying process smooth and stress-free.</p>
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="history-section">
+        <div class="container">
+            <div class="history-container">
+                <h2>Our Journey Through the Years</h2>
+                
+                <div class="timeline">
+                    <!-- Timeline Item 1 -->
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>The Beginning</h3>
+                            <span class="timeline-date">2010</span>
+                            <p>Prophecy Autos was founded with just five vehicles and a small team of three passionate automotive enthusiasts.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 2 -->
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Expansion</h3>
+                            <span class="timeline-date">2013</span>
+                            <p>We moved to our current location and expanded our inventory to include premium and luxury vehicles.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 3 -->
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Service Center</h3>
+                            <span class="timeline-date">2015</span>
+                            <p>We opened our state-of-the-art service center to provide comprehensive maintenance and repair services.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 4 -->
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Community Award</h3>
+                            <span class="timeline-date">2018</span>
+                            <p>Prophecy Autos was recognized with the "Business of the Year" award for our contributions to the local community.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 5 -->
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Digital Transformation</h3>
+                            <span class="timeline-date">2020</span>
+                            <p>We launched our online inventory system and virtual showroom to enhance the customer experience.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 6 -->
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Today</h3>
+                            <span class="timeline-date">2023</span>
+                            <p>We continue to grow and innovate, staying true to our founding principles while embracing new technologies and trends.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-container">
+                <h2>Ready to Experience the Prophecy Difference?</h2>
+                <p>Visit our showroom today to explore our premium inventory and meet our friendly team. We're here to help you find the perfect vehicle for your needs and budget.</p>
+                <div class="cta-buttons">
+                    <a href="inventory.html" class="btn btn-primary">Browse Inventory</a>
+                    <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="Prophecy Autos" style="height: 60px; margin-bottom: 15px;">
+                    </div>
+                    <p>Premium car dealership offering quality vehicles, financing, trade-in and after-sales services.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="inventory.html">Inventory</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#financing">Financing Options</a></li>
+                        <li><a href="services.html#trade-in">Trade-In Services</a></li>
+                        <li><a href="services.html#import">Import Assistance</a></li>
+                        <li><a href="services.html#after-sales">After-Sales Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Buknor, Islo Lagos, Nigeria</li>
+                        <li><i class="fas fa-phone"></i> +234 903 411 0043</li>
+                        <li><i class="fas fa-whatsapp"></i> +234 904 351 4797</li>
+                        <li><i class="fas fa-envelope"></i> info@prophecyautos.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Prophecy Autos. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Chat Button -->
+    <div class="whatsapp-chat">
+        <a href="https://wa.me/2349043514797" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/whatsapp-chat.js"></script>
+</body>
+</html>

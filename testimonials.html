@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read customer testimonials and reviews about Prophecy Autos - your trusted car dealership for quality vehicles and exceptional service.">
+    <meta name="keywords" content="car dealership reviews, Prophecy Autos testimonials, customer feedback, car buying experience, auto dealer reviews">
+    <title>Customer Testimonials | Prophecy Autos</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Testimonials Page Specific Styles */
+        .testimonials-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hero-bg.svg');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+            color: #fff;
+        }
+        
+        .testimonials-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .testimonials-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .testimonials-container {
+            padding: 80px 0;
+        }
+        
+        .testimonial-filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #555;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            color: var(--primary-color);
+        }
+        
+        .filter-btn.active:after {
+            width: 80%;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial-meta h4 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        
+        .testimonial-meta p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .testimonial-rating {
+            color: #FFD700;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-car {
+            font-size: 0.9rem;
+            color: #777;
+            font-style: italic;
+        }
+        
+        .testimonial-date {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 0.8rem;
+            color: #999;
+        }
+        
+        .testimonial-quote {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 3rem;
+            color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .video-testimonials {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .video-testimonials h2 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .video-testimonial {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .video-testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .video-info {
+            padding: 20px;
+            background: #fff;
+        }
+        
+        .video-info h4 {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+        }
+        
+        .video-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .testimonial-form-section {
+            padding: 80px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('images/cta-bg.svg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .testimonial-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+        }
+        
+        .testimonial-form-container h2 {
+            margin-bottom: 30px;
+        }
+        
+        .testimonial-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        
+        .testimonial-form input,
+        .testimonial-form textarea,
+        .testimonial-form select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+        }
+        
+        .testimonial-form input::placeholder,
+        .testimonial-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .testimonial-form .rating-select {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            grid-column: span 2;
+        }
+        
+        .rating-select i {
+            font-size: 2rem;
+            color: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .rating-select i:hover,
+        .rating-select i.active {
+            color: #FFD700;
+        }
+        
+        .testimonial-form button {
+            grid-column: span 2;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .testimonial-form button:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Responsive styles for testimonials page */
+        @media (max-width: 768px) {
+            .testimonials-grid,
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-filters {
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                margin-bottom: 10px;
+            }
+            
+            .testimonial-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+            
+            .testimonial-form button {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.svg" alt="Prophecy Autos"></a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="inventory.html">Inventory</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="testimonials.html" class="active">Testimonials</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Testimonials Hero Section -->
+    <section class="testimonials-hero">
+        <div class="container">
+            <h1>Customer Testimonials</h1>
+            <p>Discover what our satisfied customers have to say about their experience with Prophecy Autos. Real stories from real people who trusted us with their automotive needs.</p>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-container">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+                <p>We pride ourselves on delivering exceptional service and quality vehicles to our customers. Here's what they have to say about their experience with Prophecy Autos.</p>
+            </div>
+
+            <div class="testimonial-filters">
+                <button class="filter-btn active" data-filter="all">All Reviews</button>
+                <button class="filter-btn" data-filter="sales">Sales Experience</button>
+                <button class="filter-btn" data-filter="service">Service Department</button>
+                <button class="filter-btn" data-filter="financing">Financing</button>
+                <button class="filter-btn" data-filter="import">Import Assistance</button>
+            </div>
+
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card" data-category="sales">
+                    <div class="testimonial-date">June 15, 2023</div>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John D.">
+                        </div>
+                        <div class="testimonial-meta">
+                            <h4>John D.</h4>
+                            <p>First-time buyer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"As a first-time car buyer, I was nervous about the process. The team at Prophecy Autos made everything so simple and transparent. They took the time to understand my needs and budget, and helped me find the perfect car. I couldn't be happier with my purchase!"</p>
+                    <p class="testimonial-car">Purchased: 2020 Toyota Camry</p>
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card" data-category="financing">
+                    <div class="testimonial-date">May 3, 2023</div>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah M.">
+                        </div>
+                        <div class="testimonial-meta">
+                            <h4>Sarah M.</h4>
+                            <p>Repeat customer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-text">"I was worried about getting approved for financing due to my credit history, but the finance team at Prophecy Autos worked tirelessly to find me a great rate. They explained all my options clearly and helped me choose the best one for my situation. This is my second car from them, and I'll definitely be back!"</p>
+                    <p class="testimonial-car">Purchased: 2021 Honda Accord</p>
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card" data-category="service">
+                    <div class="testimonial-date">April 18, 2023</div>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Robert T.">
+                        </div>
+                        <div class="testimonial-meta">
+                            <h4>Robert T.</h4>
+                            <p>Service customer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The service department at Prophecy Autos is exceptional. I brought my car in for what I thought was a major issue, and they diagnosed it quickly and honestly. Turns out it was a simple fix that didn't cost much at all. Their integrity and expertise have made me a customer for life."</p>
+                    <p class="testimonial-car">Service for: 2019 Ford Explorer</p>
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card" data-category="import">
+                    <div class="testimonial-date">March 22, 2023</div>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Emily K.">
+                        </div>
+                        <div class="testimonial-meta">
+                            <h4>Emily K.</h4>
+                            <p>Import customer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"I had been dreaming of owning a specific Japanese import model for years. Prophecy Autos made that dream come true! They handled all the complicated import paperwork, shipping logistics, and compliance issues. The car arrived in perfect condition, exactly as promised. Their import assistance service is truly top-notch!"</p>
+                    <p class="testimonial-car">Imported: 2018 Nissan Skyline GTR</p>
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="testimonial-card" data-category="sales">
+                    <div class="testimonial-date">February 9, 2023</div>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Michael P.">
+                        </div>
+                        <div class="testimonial-meta">
+                            <h4>Michael P.</h4>
+                            <p>Family customer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"We needed a reliable family SUV that could accommodate our growing family. The sales team listened to our requirements and showed us several options within our budget. They were patient as we test drove multiple vehicles and never pressured us. We found the perfect SUV for our family and couldn't be happier with the entire experience."</p>
+                    <p class="testimonial-car">Purchased: 2022 Mazda CX-9</p>
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 6 -->
+                <div class="testimonial-card" data-category="service">
+                    <div class="testimonial-date">January 17, 2023</div>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/15.jpg" alt="Jessica L.">
+                        </div>
+                        <div class="testimonial-meta">
+                            <h4>Jessica L.</h4>
+                            <p>Long-term customer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"I've been bringing my vehicles to Prophecy Autos for service for over 5 years now. Their technicians are knowledgeable, efficient, and always explain what needs to be done in terms I can understand. The service department keeps detailed records of all my visits, which helps with maintaining my car properly. I appreciate their attention to detail and fair pricing."</p>
+                    <p class="testimonial-car">Service for: 2017 Audi A4</p>
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Testimonials Section -->
+    <section class="video-testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Video Testimonials</h2>
+                <p>Watch our customers share their experiences with Prophecy Autos in their own words.</p>
+            </div>
+
+            <div class="video-grid">
+                <!-- Video Testimonial 1 -->
+                <div class="video-testimonial">
+                    <div class="video-container">
+                        <!-- Replace with actual YouTube embed code when available -->
+                        <img src="https://via.placeholder.com/350x200?text=Video+Testimonial" alt="Video Testimonial Placeholder">
+                    </div>
+                    <div class="video-info">
+                        <h4>David's Experience with Prophecy Autos</h4>
+                        <p>David shares how he found his dream car through our import assistance program.</p>
+                    </div>
+                </div>
+
+                <!-- Video Testimonial 2 -->
+                <div class="video-testimonial">
+                    <div class="video-container">
+                        <!-- Replace with actual YouTube embed code when available -->
+                        <img src="https://via.placeholder.com/350x200?text=Video+Testimonial" alt="Video Testimonial Placeholder">
+                    </div>
+                    <div class="video-info">
+                        <h4>The Johnson Family's Story</h4>
+                        <p>How the Johnsons found the perfect family vehicle with help from our sales team.</p>
+                    </div>
+                </div>
+
+                <!-- Video Testimonial 3 -->
+                <div class="video-testimonial">
+                    <div class="video-container">
+                        <!-- Replace with actual YouTube embed code when available -->
+                        <img src="https://via.placeholder.com/350x200?text=Video+Testimonial" alt="Video Testimonial Placeholder">
+                    </div>
+                    <div class="video-info">
+                        <h4>Lisa's Financing Success</h4>
+                        <p>Lisa explains how our finance team helped her get approved despite credit challenges.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leave a Testimonial Section -->
+    <section class="testimonial-form-section">
+        <div class="container">
+            <div class="testimonial-form-container">
+                <h2>Share Your Experience</h2>
+                <p>We value your feedback! Please take a moment to share your experience with Prophecy Autos.</p>
+                
+                <form class="testimonial-form" id="testimonialForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <select required>
+                            <option value="" disabled selected>Select Service Type</option>
+                            <option value="sales">Sales Experience</option>
+                            <option value="service">Service Department</option>
+                            <option value="financing">Financing</option>
+                            <option value="import">Import Assistance</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Car Make & Model (if applicable)">
+                    </div>
+                    <div class="form-group full-width">
+                        <div class="rating-select">
+                            <i class="far fa-star" data-rating="1"></i>
+                            <i class="far fa-star" data-rating="2"></i>
+                            <i class="far fa-star" data-rating="3"></i>
+                            <i class="far fa-star" data-rating="4"></i>
+                            <i class="far fa-star" data-rating="5"></i>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <textarea rows="5" placeholder="Share your experience with us" required></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="photo-upload" style="color: #fff; margin-bottom: 10px; display: block; text-align: left;">
+                            Upload a photo (optional):
+                        </label>
+                        <input type="file" id="photo-upload" accept="image/*" style="background: none; border: 1px dashed rgba(255,255,255,0.3); padding: 20px;">
+                    </div>
+                    <button type="submit">Submit Your Testimonial</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="Prophecy Autos" style="height: 60px; margin-bottom: 15px;">
+                    </div>
+                    <p>Your trusted partner in finding the perfect vehicle. We offer a wide selection of quality cars, exceptional customer service, and comprehensive automotive solutions.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="inventory.html">Inventory</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html#financing">Financing Options</a></li>
+                        <li><a href="services.html#trade-in">Trade-In Appraisal</a></li>
+                        <li><a href="services.html#import">Import Assistance</a></li>
+                        <li><a href="services.html#after-sales">After-Sales Support</a></li>
+                        <li><a href="services.html">Vehicle Maintenance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Buknor, Islo Lagos, Nigeria</li>
+                        <li><i class="fas fa-phone"></i> +234 903 411 0043</li>
+                        <li><i class="fas fa-whatsapp"></i> +234 904 351 4797</li>
+                        <li><i class="fas fa-envelope"></i> info@prophecyautos.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Prophecy Autos. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Chat Button -->
+    <a href="https://wa.me/2349043514797" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-top-btn">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+        // Testimonial Filter Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const testimonialCards = document.querySelectorAll('.testimonial-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter testimonials
+                    testimonialCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Star Rating Functionality
+            const ratingStars = document.querySelectorAll('.rating-select i');
+            let selectedRating = 0;
+            
+            ratingStars.forEach(star => {
+                star.addEventListener('mouseover', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    highlightStars(rating);
+                });
+                
+                star.addEventListener('mouseout', function() {
+                    highlightStars(selectedRating);
+                });
+                
+                star.addEventListener('click', function() {
+                    selectedRating = parseInt(this.getAttribute('data-rating'));
+                    highlightStars(selectedRating);
+                    
+                    // Add hidden input with rating value
+                    const ratingInput = document.querySelector('#rating-value') || document.createElement('input');
+                    ratingInput.type = 'hidden';
+                    ratingInput.id = 'rating-value';
+                    ratingInput.name = 'rating';
+                    ratingInput.value = selectedRating;
+                    
+                    if (!document.querySelector('#rating-value')) {
+                        document.querySelector('#testimonialForm').appendChild(ratingInput);
+                    }
+                });
+            });
+            
+            function highlightStars(rating) {
+                ratingStars.forEach(star => {
+                    const starRating = parseInt(star.getAttribute('data-rating'));
+                    if (starRating <= rating) {
+                        star.classList.remove('far');
+                        star.classList.add('fas');
+                    } else {
+                        star.classList.remove('fas');
+                        star.classList.add('far');
+                    }
+                });
+            }
+            
+            // Form Submission
+            const testimonialForm = document.getElementById('testimonialForm');
+            testimonialForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Here you would normally send the form data to a server
+                // For demo purposes, we'll just show an alert
+                alert('Thank you for your testimonial! After review, it will be published on our website.');
+                testimonialForm.reset();
+                selectedRating = 0;
+                highlightStars(0);
+            });
+        });
+    </script>
+</body>
+</html>
